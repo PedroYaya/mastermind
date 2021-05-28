@@ -3,10 +3,12 @@
         <div v-for="(row, i) in getCurrentGame.max_guesses" :key="i" class="guess-row">
             <h2 class="number"> {{ i + 1 }}</h2>
             <div class="guess">
-                <div class="index"></div>
-                <div class="index"></div>
-                <div class="index"></div>
-                <div class="index"></div>
+                <a v-for="(slot,j) in getCurrentGame.num_slots"
+                   :key="j"
+                   v-on:click="guessUnit(j)"
+                   :style="[getCurrentGame.guesses.length === i ? {background: colors[j]} : {}]"
+                   class="index"
+                ></a>
             </div>
             <div class="result">
                 <div class="spot-row">
@@ -27,10 +29,26 @@
 
     export default {
         name: 'Board',
+        data() {
+            return {
+                colors: {
+                    0: '',
+                    1: '',
+                    2: '',
+                    3: '',
+                }
+            }
+        },
         computed: {
             ...mapGetters([
-                'getCurrentGame'
+                'getCurrentGame',
+                'getUnitGuess'
             ])
+        },
+        methods: {
+            guessUnit(i) {
+                this.colors[i] = this.getUnitGuess;
+            }
         }
     }
 </script>
