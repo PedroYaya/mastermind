@@ -1,5 +1,5 @@
 <template>
-    <div class="board">
+    <div class="board shadow">
         <div v-for="(row, index) in rows" :key="index" class="guess-row">
             <h2 class="number"> {{ row.number }}</h2>
             <div class="guess">
@@ -58,6 +58,7 @@
         background: white;
         border-radius: 7px;
         margin: 0 10px;
+        padding: 5px;
     }
 
     .guess-row {
@@ -68,6 +69,7 @@
 
         .number {
             color: #e2e2e2;
+            margin: 0;
 
             &.enabled {
                 color: gray;
@@ -102,12 +104,16 @@
 
     @media screen and (min-width: 768px) {
 
-        .guess-row {
-            .guess {
-                margin: 0px 15px;
+        .board {
+            padding: 10px;
 
-                .index {
-                    margin: 10px;
+            .guess-row {
+                .guess {
+                    margin: 0px 15px;
+
+                    .index {
+                        margin: 10px;
+                    }
                 }
             }
         }
