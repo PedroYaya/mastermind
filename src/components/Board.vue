@@ -5,10 +5,10 @@
             <div class="guess">
                 <a v-for="(slot,j) in getCurrentGame.num_slots"
                    :key="j"
-                   v-on:click="guessUnit(j)"
-                   :style="[getCurrentGame.guesses.length === i ? {background: colors[j]} : {}]"
-                   class="index"
-                ></a>
+                   v-on:click="guessUnit(i, j)"
+                   :style="[activeRow === i ? {background: colors[j]} : {}]"
+                   class="index">
+                </a>
             </div>
             <div class="result">
                 <div class="spot-row">
@@ -43,11 +43,16 @@
             ...mapGetters([
                 'getCurrentGame',
                 'getUnitGuess'
-            ])
+            ]),
+            activeRow(){
+               return this.getCurrentGame.guesses.length
+            }
         },
         methods: {
-            guessUnit(i) {
-                this.colors[i] = this.getUnitGuess;
+            guessUnit(i, j) {
+                if (i === this.activeRow) {
+                    this.colors[j] = this.getUnitGuess;
+                }
             }
         }
     }
