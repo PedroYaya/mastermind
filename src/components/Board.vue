@@ -99,6 +99,15 @@
             border-radius: 15px;
             background: #c9c9c9;
             margin: 2px;
+
+            &.black {
+                background: black;
+            }
+
+            &.white {
+                background: white;
+                border: 1px solid black;
+            }
         }
     }
 
