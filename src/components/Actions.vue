@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <a class="confirm shadow disabled">
+        <a v-on:click="confirmGuess" class="confirm shadow disabled">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
         <a class="reset shadow disabled">
@@ -29,14 +29,25 @@
             newGame () {
                 const url = 'http://localhost:8000/api/games/';
                 const game = {
-                    "num_colors": 6,
-                    "num_slots": 6,
-                    "max_guesses": 10
+                    'num_colors': 4,
+                    'num_slots': 4,
+                    'max_guesses': 8
                 }
                 axios.post(url, game).then( (response) => {
-                        console.log(response)
+                    this.$store.commit('setCurrentGame', response.data)
+                    console.log(response.data)
                 })
+            },
 
+            confirmGuess () {
+                const id = this.$store.getters.getCurrentGame.id;
+                const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
+                const guess = {
+                    code: ['orange', 'blue', 'green', 'yellow']
+                }
+                axios.post(url, guess).then( (response) => {
+                    console.log(response.data)
+                })
             }
         }
     }

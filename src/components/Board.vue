@@ -1,7 +1,7 @@
 <template>
     <div class="board shadow">
-        <div v-for="(row, index) in rows" :key="index" class="guess-row">
-            <h2 class="number"> {{ row.number }}</h2>
+        <div v-for="(row, index) in currentGame.max_guesses" :key="index" class="guess-row">
+            <h2 class="number"> {{ index + 1 }}</h2>
             <div class="guess">
                 <div class="index"></div>
                 <div class="index"></div>
@@ -25,32 +25,13 @@
 <script>
     export default {
         name: 'Board',
-        data() {
-            return {
-                rows: [
-                    {
-                        number: '1'
-                    },
-                    {
-                        number: '2'
-                    },
-                    {
-                        number: '3'
-                    },
-                    {
-                        number: '4'
-                    },
-                    {
-                        number: '5'
-                    },
-                    {
-                        number: '6'
-                    }
-                ]
-            }
-        },
         mounted() {
             console.log(this.$store.state.currentRow)
+        },
+        computed: {
+            currentGame() {
+                return this.$store.getters.getCurrentGame
+            }
         }
     }
 </script>

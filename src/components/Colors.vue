@@ -1,16 +1,17 @@
 <template>
     <div class="colors">
-        <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div>
+        <div v-for="(color, index) in colors" :key="index" :style="{background: color}" class="color"></div>
     </div>
 </template>
 
 <script>
     export default {
-      name: 'Colors',
+        name: 'Colors',
+        computed: {
+            colors() {
+                return this.$store.getters.getCurrentGame.colors
+            }
+        }
     }
 </script>
 
