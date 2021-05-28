@@ -48,6 +48,9 @@
                     }
                 ]
             }
+        },
+        mounted() {
+            console.log(this.$store.state.currentRow)
         }
     }
 </script>
