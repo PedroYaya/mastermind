@@ -1,7 +1,7 @@
 <template>
     <div class="board shadow">
-        <div v-for="(row, index) in currentGame.max_guesses" :key="index" class="guess-row">
-            <h2 class="number"> {{ index + 1 }}</h2>
+        <div v-for="(row, i) in getCurrentGame.max_guesses" :key="i" class="guess-row">
+            <h2 class="number"> {{ i + 1 }}</h2>
             <div class="guess">
                 <div class="index"></div>
                 <div class="index"></div>
@@ -23,15 +23,14 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
         name: 'Board',
-        mounted() {
-            console.log(this.$store.state.currentRow)
-        },
         computed: {
-            currentGame() {
-                return this.$store.getters.getCurrentGame
-            }
+            ...mapGetters([
+                'getCurrentGame'
+            ])
         }
     }
 </script>

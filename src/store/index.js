@@ -6,18 +6,23 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         currentGame: { "guesses": [], "num_colors": 4, "max_guesses": 8, "num_slots": 4},
-        currentRow: 'UNO'
+        unitGuess: '',
+        finalGuess: []
     },
     mutations: {
         setCurrentGame(state, payload) {
             state.currentGame = payload
         },
-        setCurrentRow(state, payload) {
-            state.currentRow = payload
+        setUnitGuess(state, payload) {
+            state.unitGuess = payload
+        },
+        setFinalGuess(state, payload) {
+            state.finalGuess = payload
         }
     },
     getters: {
-        getCurrentRow: state => state.currentRow,
-        getCurrentGame: state => state.currentGame
+        getCurrentGame: state => state.currentGame,
+        getUnitGuess: state => state.unitGuess,
+        getFinalGuess: state => state.finalGuess,
     }
 })

@@ -1,9 +1,10 @@
 <template>
     <div class="colors">
-        <div v-for="(color, index) in getCurrentGame.colors" :key="index"
-             :style="{background: color}"
-             class="color">
-        </div>
+        <a  v-for="(color, i) in getCurrentGame.colors" :key="i"
+            v-on:click="setUnitGuess(i)"
+            :style="{background: color}"
+            class="color">
+        </a>
     </div>
 </template>
 
@@ -16,6 +17,12 @@
             ...mapGetters([
                 'getCurrentGame'
             ])
+        },
+        methods: {
+            setUnitGuess(i) {
+                this.$store.commit('setUnitGuess', this.getCurrentGame.colors[i])
+                console.log(this.getCurrentGame.colors[i])
+            }
         }
     }
 </script>

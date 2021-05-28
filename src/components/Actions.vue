@@ -6,14 +6,11 @@
         <a class="reset shadow disabled">
             <img src="../assets/icons/reset.png" height="20px" width="20px"/>
         </a>
-        <div class="results">
-            <h3 class="win">WON</h3>
+        <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
+            <h3 class="win">{{ getCurrentGame.status }}</h3>
             <span>Solution:</span>
             <div class="solution">
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
+                <div v-for="(color, i) in getCurrentGame.secret_code" :key="i" class="slot" :style="{background: color}"></div>
             </div>
         </div>
         <a v-on:click="newGame" class="new-game-cta shadow">New Game</a>
@@ -22,6 +19,7 @@
 
 <script>
     import axios from 'axios'
+    import { mapGetters } from 'vuex'
 
     export default {
         name: 'Actions',
@@ -49,6 +47,11 @@
                     console.log(response.data)
                 })
             }
+        },
+        computed: {
+            ...mapGetters([
+                'getCurrentGame'
+            ])
         }
     }
 </script>
