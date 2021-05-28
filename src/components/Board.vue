@@ -81,6 +81,7 @@
             margin: 0px 5px;
 
             .index {
+                cursor: pointer;
                 width: 30px;
                 height: 30px;
                 border-radius: 30px;

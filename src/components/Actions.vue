@@ -33,11 +33,13 @@
         padding: 10px 0;
 
         .confirm, .reset {
+            cursor: pointer;
             display: block;
             background: white;
             border-radius: 15px;
             padding: 5px;
             margin: 5px 0;
+            width: 35px;
 
             &.disabled {
                 opacity: .6;
@@ -77,6 +79,7 @@
         }
 
         .new-game-cta {
+            cursor: pointer;
             position: absolute;
             bottom: 1px;
             background: white;

@@ -20,6 +20,7 @@
         margin-top: 20px;
 
         .color {
+            cursor: pointer;
             display: block;
             margin: 15px auto;
             width: 30px;
