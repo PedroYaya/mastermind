@@ -1,8 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
-Vue.use(Vuex)
-
-export default Vuex.Store({
-    state: {}
+export default createStore({
+    state: {
+        currentGame: {},
+        currentRow: 'UNO',
+    },
+    mutations: {
+        setCurrentRow(state, payload) {
+            state.currentRow = payload
+        }
+    },
+    getters: {
+        getCurrentRow: state => state.currentRow
+    }
 })

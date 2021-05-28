@@ -16,13 +16,29 @@
                 <div class="slot"></div>
             </div>
         </div>
-        <a class="new-game-cta shadow">New Game</a>
+        <a v-on:click="newGame" class="new-game-cta shadow">New Game</a>
     </div>
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: 'Actions',
+        methods: {
+            newGame () {
+                const url = 'http://localhost:8000/api/games/';
+                const game = {
+                    "num_colors": 6,
+                    "num_slots": 6,
+                    "max_guesses": 10
+                }
+                axios.post(url, game).then( (response) => {
+                        console.log(response)
+                })
+
+            }
+        }
     }
 </script>
 
