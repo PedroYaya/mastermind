@@ -57,24 +57,7 @@
                     this.$store.commit('setRowGuess', rowGuess)
                 }
             }
-        },
-        watch: {
-            colors: {
-                handler () {
-                    let ready = true
-                    for (var i in this.colors) {
-                        if (this.colors[i] === '') {
-                            ready = false
-                            break;
-                        }
-                    }
-                    if (ready) {
-                        this.$store.commit('setRowGuess', this.colors)
-                    }
-                },
-                deep: true
-            }
-        },
+        }
     }
 </script>
 
