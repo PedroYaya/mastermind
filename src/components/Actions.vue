@@ -51,7 +51,7 @@
                     guess.code.push(this.$store.getters.getRowGuess[i])
                 }
 
-                if (!this.disabled) {
+                if (!this.isDisabled) {
                     axios.post(url, guess).then( (response) => {
                         this.$store.commit('setCurrentGame', response.data)
                         this.$store.commit('restartRowGuess')
