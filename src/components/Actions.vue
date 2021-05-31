@@ -64,17 +64,13 @@
                 'getCurrentGame'
             ]),
             isDisabled() {
-                let idx = 0
+                let disabled = false
                 this.$store.getters.getRowGuess.forEach(e => {
-                    if (e !== '') {
-                        idx++
+                    if (e === '') {
+                        disabled = true
                     }
                 })
-                if (idx === this.$store.getters.getRowGuess.length) {
-                    return false
-                } else {
-                    return true
-                }
+                return disabled
             }
         }
     }
