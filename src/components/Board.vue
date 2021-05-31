@@ -45,7 +45,11 @@
                 'getUnitGuess'
             ]),
             activeRow(){
-               return this.getCurrentGame.guesses.length
+               if (this.getCurrentGame.disabled) {
+                   return false
+               } else {
+                   return this.getCurrentGame.guesses.length
+               }
             }
         },
         methods: {
