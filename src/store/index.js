@@ -28,7 +28,10 @@ export default new Vuex.Store({
         },
         setInitialPegs(state) {
             for (let i = 0; i < state.currentGame.max_guesses; i++) {
-                let score = ['', '', '', '']
+                let score = []
+                for (let j = 0; j < state.currentGame.num_slots; j++) {
+                    score.push('')
+                }
                 state.pegs.push(score)
             }
         }
