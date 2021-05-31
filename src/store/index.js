@@ -31,7 +31,6 @@ export default new Vuex.Store({
                 let score = ['', '', '', '']
                 state.pegs.push(score)
             }
-            console.log(state.pegs)
         }
     },
     getters: {
