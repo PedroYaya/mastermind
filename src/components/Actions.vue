@@ -1,9 +1,9 @@
 <template>
     <div class="actions">
-        <a v-on:click="confirmGuess" class="confirm shadow" :class="disabled ? ' disabled' : ''">
+        <a v-on:click="confirmGuess" class="confirm shadow" :class="isDisabled ? ' disabled' : ''">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
-        <a v-on:click="newGame" class="reset shadow" :class="disabled ? ' disabled' : ''">
+        <a v-on:click="newGame" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
             <img src="../assets/icons/reset.png" height="20px" width="20px"/>
         </a>
         <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
@@ -25,13 +25,15 @@
         name: 'Actions',
         methods: {
             newGame () {
-                this.$store.commit('setRowGuess', [])
                 const url = 'http://localhost:8000/api/games/';
                 const game = {
                     'num_colors': 4,
                     'num_slots': 4,
                     'max_guesses': 8
                 }
+
+                this.$store.commit('restartRowGuess')
+
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
                 })
@@ -52,7 +54,7 @@
                 if (!this.disabled) {
                     axios.post(url, guess).then( (response) => {
                         this.$store.commit('setCurrentGame', response.data)
-                        this.$store.commit('setRowGuess', [])
+                        this.$store.commit('restartRowGuess')
                     })
                 }
             }
@@ -61,14 +63,18 @@
             ...mapGetters([
                 'getCurrentGame'
             ]),
-            disabled() {
-                let disabled = false
-                this.$store.getters.getRowGuess.forEach(i => {
-                    if (i === '') {
-                        disabled = true
+            isDisabled() {
+                let idx = 0
+                this.$store.getters.getRowGuess.forEach(e => {
+                    if (e !== '') {
+                        idx++
                     }
                 })
-                return disabled
+                if (idx === this.$store.getters.getRowGuess.length) {
+                    return false
+                } else {
+                    return true
+                }
             }
         }
     }

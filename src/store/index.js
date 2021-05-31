@@ -18,6 +18,12 @@ export default new Vuex.Store({
         },
         setRowGuess(state, payload) {
             state.rowGuess = payload
+        },
+        restartRowGuess(state) {
+            state.rowGuess = []
+            for (let i = 0; i < state.currentGame.num_slots; i++) {
+                state.rowGuess.push('')
+            }
         }
     },
     getters: {
