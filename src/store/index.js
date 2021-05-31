@@ -7,7 +7,7 @@ export default new Vuex.Store({
     state: {
         currentGame: {"colors": ['red', 'blue', 'green', 'yellow'], "guesses": [], "num_colors": 4, "max_guesses": 8, "num_slots": 4},
         unitGuess: '',
-        finalGuess: []
+        rowGuess: []
     },
     mutations: {
         setCurrentGame(state, payload) {
@@ -16,13 +16,13 @@ export default new Vuex.Store({
         setUnitGuess(state, payload) {
             state.unitGuess = payload
         },
-        setFinalGuess(state, payload) {
-            state.finalGuess = payload
+        setRowGuess(state, payload) {
+            state.rowGuess = payload
         }
     },
     getters: {
         getCurrentGame: state => state.currentGame,
         getUnitGuess: state => state.unitGuess,
-        getFinalGuess: state => state.finalGuess,
+        getRowGuess: state => state.rowGuess,
     }
 })

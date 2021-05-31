@@ -51,10 +51,27 @@
         methods: {
             guessUnit(i, j) {
                 if (i === this.activeRow) {
-                    this.colors[j] = this.getUnitGuess;
+                    this.colors[j] = this.getUnitGuess
                 }
             }
-        }
+        },
+        watch: {
+            colors: {
+                handler () {
+                    let ready = true
+                    for (var i in this.colors) {
+                        if (this.colors[i] === '') {
+                            ready = false
+                            break;
+                        }
+                    }
+                    if (ready) {
+                        this.$store.commit('setRowGuess', this.colors)
+                    }
+                },
+                deep: true
+            }
+        },
     }
 </script>
 
