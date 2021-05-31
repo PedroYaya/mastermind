@@ -51,6 +51,9 @@
             guessUnit(i, j) {
                 if (i === this.activeRow) {
                     let rowGuess = this.$store.getters.getRowGuess
+                    for (let i = 0; i < this.getCurrentGame.num_slots; i++) {
+                        rowGuess.push('')
+                    }
                     rowGuess.splice(j, 1, this.getUnitGuess)
                     this.$store.commit('setRowGuess', rowGuess)
                 }
