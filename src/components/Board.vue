@@ -15,9 +15,10 @@
             </div>
             <div class="result">
                 <div class="pegs-row">
-                    <div v-for="(k) in getCurrentGame.num_slots"
+                    <div v-for="(peg, k) in getPegs[i]"
                          :key="k"
-                         class="peg">
+                         class="peg"
+                         :class="peg">
                     </div>
                 </div>
             </div>
@@ -34,7 +35,8 @@
             ...mapGetters([
                 'getCurrentGame',
                 'getUnitGuess',
-                'getRowGuess'
+                'getRowGuess',
+                'getPegs'
             ]),
             activeRow(){
                if (this.getCurrentGame.disabled) {
@@ -58,6 +60,7 @@
         },
         beforeMount() {
             this.$store.commit('restartRowGuess')
+            this.$store.commit('setInitialPegs')
         }
     }
 </script>
