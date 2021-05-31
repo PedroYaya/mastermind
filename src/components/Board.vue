@@ -14,11 +14,11 @@
                 </a>
             </div>
             <div class="result">
-                <div class="peg-row">
+                <div class="pegs-row">
                     <div class="peg"></div>
                     <div class="peg"></div>
                 </div>
-                <div class="peg-row">
+                <div class="pegs-row">
                     <div class="peg"></div>
                     <div class="peg"></div>
                 </div>
@@ -99,7 +99,7 @@
             }
         }
 
-        .peg-row {
+        .pegs-row {
             display: flex;
 
             .peg {
