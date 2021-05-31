@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <a v-on:click="confirmGuess" class="confirm shadow" :class="confirm ? '' : ' disabled'">
+        <a v-on:click="confirmGuess" class="confirm shadow" :class="!confirm ? ' disabled' : ''">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
         <a class="reset shadow disabled">
