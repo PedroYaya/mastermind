@@ -1,9 +1,9 @@
 <template>
     <div class="actions">
-        <a v-on:click="confirmGuess" class="confirm shadow" :class="!confirm ? ' disabled' : ''">
+        <a v-on:click="confirmGuess" class="confirm shadow" :class="disabled ? ' disabled' : ''">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
-        <a class="reset shadow disabled">
+        <a v-on:click="newGame" class="reset shadow" :class="disabled ? ' disabled' : ''">
             <img src="../assets/icons/reset.png" height="20px" width="20px"/>
         </a>
         <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
@@ -25,6 +25,7 @@
         name: 'Actions',
         methods: {
             newGame () {
+                this.$store.commit('setRowGuess', [])
                 const url = 'http://localhost:8000/api/games/';
                 const game = {
                     'num_colors': 4,
@@ -48,11 +49,10 @@
                     guess.code.push(this.$store.getters.getRowGuess[i])
                 }
 
-                if (this.confirm) {
+                if (!this.disabled) {
                     axios.post(url, guess).then( (response) => {
                         this.$store.commit('setCurrentGame', response.data)
                         this.$store.commit('setRowGuess', [])
-                        console.log(response.data)
                     })
                 }
             }
@@ -61,12 +61,14 @@
             ...mapGetters([
                 'getCurrentGame'
             ]),
-            confirm() {
-                if (this.$store.getters.getRowGuess.length === 0) {
-                    return false
-                } else {
-                    return true
-                }
+            disabled() {
+                let disabled = false
+                this.$store.getters.getRowGuess.forEach(i => {
+                    if (i === '') {
+                        disabled = true
+                    }
+                })
+                return disabled
             }
         }
     }

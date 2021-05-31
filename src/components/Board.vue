@@ -9,14 +9,14 @@
                 <a v-for="(j) in getCurrentGame.num_slots"
                    :key="j"
                    v-on:click="guessUnit(i, j)"
-                   :style="[activeRow === i ? {background: colors[j]} : {}]"
+                   :style="[activeRow === i ? {background: colors[j - 1]} : {}]"
                    class="index">
                 </a>
             </div>
             <div class="result">
                 <div class="pegs-row">
-                    <div v-for="(j) in getCurrentGame.num_slots"
-                         :key="j"
+                    <div v-for="(k) in getCurrentGame.num_slots"
+                         :key="k"
                          class="peg">
                     </div>
                 </div>
@@ -51,13 +51,18 @@
             guessUnit(i, j) {
                 if (i === this.activeRow) {
                     let rowGuess = this.$store.getters.getRowGuess
-                    for (let i = 0; i < this.getCurrentGame.num_slots; i++) {
-                        rowGuess.push('')
-                    }
-                    rowGuess.splice(j, 1, this.getUnitGuess)
+                    rowGuess.splice(j - 1, 1, this.getUnitGuess)
                     this.$store.commit('setRowGuess', rowGuess)
                 }
             }
+        },
+        beforeMount() {
+            //set initial row guess state
+            let arr = []
+            for (let i = 0; i < this.getCurrentGame.num_slots; i++) {
+                arr.push('')
+            }
+            this.$store.commit('setRowGuess', arr)
         }
     }
 </script>
