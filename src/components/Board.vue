@@ -32,20 +32,11 @@
 
     export default {
         name: 'Board',
-        data() {
-            return {
-                colors: {
-                    0: '',
-                    1: '',
-                    2: '',
-                    3: '',
-                }
-            }
-        },
         computed: {
             ...mapGetters([
                 'getCurrentGame',
-                'getUnitGuess'
+                'getUnitGuess',
+                'getRowGuess'
             ]),
             activeRow(){
                if (this.getCurrentGame.disabled) {
@@ -53,12 +44,17 @@
                } else {
                    return this.getCurrentGame.guesses.length
                }
+            },
+            colors() {
+                return this.getRowGuess
             }
         },
         methods: {
             guessUnit(i, j) {
                 if (i === this.activeRow) {
-                    this.colors[j] = this.getUnitGuess
+                    let rowGuess = this.$store.getters.getRowGuess
+                    rowGuess.splice(j, 1, this.getUnitGuess)
+                    this.$store.commit('setRowGuess', rowGuess)
                 }
             }
         },
