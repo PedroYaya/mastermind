@@ -6,7 +6,7 @@
                 0{{ i + 1 }}
             </h2>
             <div class="guess">
-                <a v-for="(slot,j) in getCurrentGame.num_slots"
+                <a v-for="(j) in getCurrentGame.num_slots"
                    :key="j"
                    v-on:click="guessUnit(i, j)"
                    :style="[activeRow === i ? {background: colors[j]} : {}]"
@@ -15,12 +15,10 @@
             </div>
             <div class="result">
                 <div class="pegs-row">
-                    <div class="peg"></div>
-                    <div class="peg"></div>
-                </div>
-                <div class="pegs-row">
-                    <div class="peg"></div>
-                    <div class="peg"></div>
+                    <div v-for="(j) in getCurrentGame.num_slots"
+                         :key="j"
+                         class="peg">
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,7 +98,8 @@
         }
 
         .pegs-row {
-            display: flex;
+            display: grid;
+            grid-template-columns: 50% 50%;
 
             .peg {
                 width: 10px;
