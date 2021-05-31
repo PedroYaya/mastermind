@@ -52,6 +52,7 @@
                     axios.post(url, guess).then( (response) => {
                         this.$store.commit('setCurrentGame', response.data)
                         this.$store.commit('setRowGuess', [])
+                        console.log(response.data)
                     })
                 }
             }

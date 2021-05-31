@@ -14,13 +14,13 @@
                 </a>
             </div>
             <div class="result">
-                <div class="spot-row">
-                    <div class="spot"></div>
-                    <div class="spot"></div>
+                <div class="peg-row">
+                    <div class="peg"></div>
+                    <div class="peg"></div>
                 </div>
-                <div class="spot-row">
-                    <div class="spot"></div>
-                    <div class="spot"></div>
+                <div class="peg-row">
+                    <div class="peg"></div>
+                    <div class="peg"></div>
                 </div>
             </div>
         </div>
@@ -99,26 +99,27 @@
             }
         }
 
-        .spot-row {
+        .peg-row {
             display: flex;
+
+            .peg {
+                width: 10px;
+                height: 10px;
+                border-radius: 15px;
+                background: #c9c9c9;
+                margin: 2px;
+
+                &.black {
+                    background: black;
+                }
+
+                &.white {
+                    background: white;
+                    border: 1px solid black;
+                }
+            }
         }
 
-        .spot {
-            width: 10px;
-            height: 10px;
-            border-radius: 15px;
-            background: #c9c9c9;
-            margin: 2px;
-
-            &.black {
-                background: black;
-            }
-
-            &.white {
-                background: white;
-                border: 1px solid black;
-            }
-        }
     }
 
     @media screen and (min-width: 768px) {
