@@ -39,12 +39,21 @@
             confirmGuess () {
                 const id = this.$store.getters.getCurrentGame.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
+
                 const guess = {
-                    code: ['orange', 'blue', 'green', 'yellow']
+                    code: []
                 }
-                axios.post(url, guess).then( (response) => {
-                    this.$store.commit('setCurrentGame', response.data)
-                })
+
+                for (var i in this.$store.getters.getRowGuess) {
+                    guess.code.push(this.$store.getters.getRowGuess[i])
+                }
+
+                if (this.confirm) {
+                    axios.post(url, guess).then( (response) => {
+                        this.$store.commit('setCurrentGame', response.data)
+                        console.log('post')
+                    })
+                }
             }
         },
         computed: {
