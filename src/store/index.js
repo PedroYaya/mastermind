@@ -34,6 +34,9 @@ export default new Vuex.Store({
                 }
                 state.pegs.push(score)
             }
+        },
+        setPegs(state, { i, arr}) {
+            state.pegs[i] = arr
         }
     },
     getters: {
