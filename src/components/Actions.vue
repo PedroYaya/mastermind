@@ -33,7 +33,6 @@
                 }
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
-                    console.log(response.data)
                 })
             },
 
@@ -44,7 +43,6 @@
                     code: ['orange', 'blue', 'green', 'yellow']
                 }
                 axios.post(url, guess).then( (response) => {
-                    console.log(response.data)
                     this.$store.commit('setCurrentGame', response.data)
                 })
             }

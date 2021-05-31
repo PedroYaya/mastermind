@@ -21,7 +21,6 @@
         methods: {
             setUnitGuess(i) {
                 this.$store.commit('setUnitGuess', this.getCurrentGame.colors[i])
-                console.log(this.getCurrentGame.colors[i])
             }
         }
     }
