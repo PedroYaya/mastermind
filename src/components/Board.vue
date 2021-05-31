@@ -1,7 +1,10 @@
 <template>
     <div class="board shadow">
         <div v-for="(row, i) in getCurrentGame.max_guesses" :key="i" class="guess-row">
-            <h2 class="number"> {{ i + 1 }}</h2>
+            <h2 class="row-index"
+                :class="activeRow === i ? ' enabled' : ''">
+                0{{ i + 1 }}
+            </h2>
             <div class="guess">
                 <a v-for="(slot,j) in getCurrentGame.num_slots"
                    :key="j"
@@ -94,7 +97,7 @@
         justify-content: center;
         padding: 5px;
 
-        .number {
+        .row-index {
             color: #e2e2e2;
             margin: 0;
 
