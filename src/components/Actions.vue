@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <a v-on:click="confirmGuess" class="confirm shadow disabled">
+        <a v-on:click="confirmGuess" class="confirm shadow" :class="confirm ? '' : ' disabled'">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
         <a class="reset shadow disabled">
@@ -50,7 +50,14 @@
         computed: {
             ...mapGetters([
                 'getCurrentGame'
-            ])
+            ]),
+            confirm() {
+                if (this.$store.getters.getRowGuess.length === 0) {
+                    return false
+                } else {
+                    return true
+                }
+            }
         }
     }
 </script>
