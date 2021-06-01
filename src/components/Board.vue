@@ -1,22 +1,22 @@
 <template>
     <div class="board shadow">
-        <div v-for="(row, i) in getCurrentGame.max_guesses" :key="i" class="guess-row">
+        <div v-for="(row, i) in getGrid" :key="'row-'+i" class="guess-row">
             <h2 class="row-index"
                 :class="activeRow === i ? ' enabled' : ''">
                 0{{ i + 1 }}
             </h2>
             <div class="guess">
-                <a v-for="(j) in getCurrentGame.num_slots"
-                   :key="j"
+                <a v-for="(guess, j) in getGrid[i]"
+                   :key="'guess-'+j"
                    v-on:click="guessUnit(i, j)"
-                   :style="[activeRow === i ? {background: colors[j - 1]} : {}]"
+                   :style="{background: getGrid[i][j]}"
                    class="index">
                 </a>
             </div>
             <div class="result">
                 <div class="pegs-row">
                     <div v-for="(peg, k) in getPegs[i]"
-                         :key="k"
+                         :key="'peg-'+k"
                          class="peg"
                          :class="peg">
                     </div>
@@ -35,7 +35,7 @@
             ...mapGetters([
                 'getCurrentGame',
                 'getUnitGuess',
-                'getRowGuess',
+                'getGrid',
                 'getPegs'
             ]),
             activeRow(){
@@ -44,21 +44,24 @@
                } else {
                    return this.getCurrentGame.guesses.length
                }
-            },
-            colors() {
-                return this.getRowGuess
             }
         },
         methods: {
             guessUnit(i, j) {
                 if (i === this.activeRow) {
-                    let rowGuess = this.$store.getters.getRowGuess
-                    rowGuess.splice(j - 1, 1, this.getUnitGuess)
-                    this.$store.commit('setRowGuess', rowGuess)
+                    let arr = this.getGrid[i]
+                    arr.splice(j, 1, this.getUnitGuess)
+
+                    let row = i
+                    this.$store.commit('setGrid', {
+                        row,
+                        arr
+                    })
                 }
             }
         },
         beforeMount() {
+            this.$store.commit('initializeGrid')
             this.$store.commit('restartRowGuess')
             this.$store.commit('setInitialPegs')
         }

@@ -38,7 +38,7 @@
 
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
-                    console.log(this.getCurrentGame.secret_code)
+                    //console.log(this.getCurrentGame.secret_code)
                 })
             },
 
