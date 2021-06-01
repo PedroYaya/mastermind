@@ -1,6 +1,12 @@
 <template>
     <div class="mastermind">
-        <h2>Mastermind</h2>
+
+        <div class="title-container" :class="!getGameIsDisabled && getCurrentGame.status === 'running' ? ' reference' : ''">
+            <h2>Mastermind</h2>
+            <p v-if="!getGameIsDisabled && getCurrentGame.status === 'running'">
+                Game reference <br> {{ getCurrentGame.reference}}
+            </p>
+        </div>
 
         <div class="game-container">
             <Colors/>
@@ -14,18 +20,42 @@
     import Colors from "./Colors";
     import Board from "./Board";
     import Actions from "./Actions";
+    import { mapGetters } from 'vuex'
 
     export default {
-      name: 'Mastermind',
-      components: {
-          Colors,
-          Board,
-          Actions
-      }
+        name: 'Mastermind',
+        components: {
+            Colors,
+            Board,
+            Actions
+        },
+        computed: {
+            ...mapGetters([
+                'getCurrentGame',
+                'getGameIsDisabled'
+            ]),
+        }
     }
 </script>
 
 <style lang="scss">
+
+    .title-container {
+        display: flex;
+        justify-content: center;
+
+        &.reference {
+            position: relative;
+            left: 49px;
+        }
+
+        p {
+            font-size: 13px;
+            line-height: 16px;
+            text-align: left;
+            margin: 0 0 0 6px;
+        }
+    }
 
     .game-container {
         display: grid;
@@ -40,9 +70,5 @@
             min-width: 500px;
             width: fit-content;
         }
-    }
-
-    h2 {
-        margin: 0;
     }
 </style>
