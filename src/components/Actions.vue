@@ -38,7 +38,6 @@
 
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
-                    //console.log(this.getCurrentGame.secret_code)
                 })
             },
 
@@ -89,11 +88,15 @@
         computed: {
             ...mapGetters([
                 'getCurrentGame',
-                'getRowGuess',
+                'getGrid',
                 'getPegs'
             ]),
             confirmIsDisabled() {
                 let disabled = false
+
+                let row = this.getCurrentGame.guesses.length
+
+
                 this.getRowGuess.forEach(e => {
                     if (e === '') {
                         disabled = true
