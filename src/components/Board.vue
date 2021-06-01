@@ -2,7 +2,7 @@
     <div class="board shadow">
         <div v-for="(row, i) in getGrid" :key="'row-'+i" class="guess-row">
             <h2 class="row-index"
-                :class="activeRow === i ? ' enabled' : ''">
+                :class="[activeRow === i && getCurrentGame.status === 'running' ? ' enabled' : '']">
                 0{{ i + 1 }}
             </h2>
             <div class="guess">
