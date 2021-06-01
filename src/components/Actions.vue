@@ -102,9 +102,8 @@
                 return disabled
             },
             resetIsDisabled() {
-                let row = this.getCurrentGame.guesses.length
                 let disabled = true
-                this.getGrid[row].forEach(e => {
+                this.getGrid[0].forEach(e => {
                     if (e !== '') {
                         disabled = false
                     }
