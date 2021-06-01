@@ -7,7 +7,6 @@ export default new Vuex.Store({
     state: {
         currentGame: {"disabled": true, "colors": ['red', 'blue', 'green', 'yellow'], "guesses": [], "num_colors": 4, "max_guesses": 8, "num_slots": 4},
         unitGuess: '',
-        rowGuess: [],
         gridGuess: [],
         pegs: []
     },
@@ -19,17 +18,6 @@ export default new Vuex.Store({
 
         setUnitGuess(state, payload) {
             state.unitGuess = payload
-        },
-
-        setRowGuess(state, payload) {
-            state.rowGuess = payload
-        },
-
-        restartRowGuess(state) {
-            state.rowGuess = []
-            for (let i = 0; i < state.currentGame.num_slots; i++) {
-                state.rowGuess.push('')
-            }
         },
 
         setGrid(state, { row, arr}) {
@@ -63,7 +51,6 @@ export default new Vuex.Store({
         getCurrentGame: state => state.currentGame,
         getGrid: state => state.gridGuess,
         getUnitGuess: state => state.unitGuess,
-        getRowGuess: state => state.rowGuess,
         getPegs: state => state.pegs,
     }
 })
