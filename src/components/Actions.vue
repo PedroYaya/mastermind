@@ -3,11 +3,11 @@
         <a v-on:click="confirmGuess" class="confirm shadow" :class="isDisabled ? ' disabled' : ''">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
-        <a v-on:click="newGame" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
+        <a v-on:click="newGame()" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
             <img src="../assets/icons/reset.png" height="20px" width="20px"/>
         </a>
         <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
-            <h3 class="win">{{ getCurrentGame.status }}</h3>
+            <h3 :class="getCurrentGame.status">{{ getCurrentGame.status }}</h3>
             <span>Solution:</span>
             <div class="solution">
                 <div v-for="(color, i) in getCurrentGame.secret_code" :key="i" class="slot" :style="{background: color}"></div>
@@ -118,17 +118,19 @@
         }
 
         .results {
-            margin-top: 20px;
+            margin-top: 70px;
 
             h3 {
                 font-weight: 800;
                 margin: 0;
+                text-transform: uppercase;
+                text-align: left;
 
-                &.win {
+                &.won {
                     color: green;
                 }
 
-                &.loose {
+                &.lost {
                     color: red;
                 }
             }
