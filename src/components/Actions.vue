@@ -44,9 +44,7 @@
                 const id = this.getCurrentGame.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
 
-                const guess = {
-                    code: []
-                }
+                const guess = { code: [] }
 
                 for (var i in this.getRowGuess) {
                     guess.code.push(this.getRowGuess[i])
@@ -63,17 +61,19 @@
                         for (let i = 0; i < response.data.guesses[row].black_pegs; i++) {
                             arr.push('black')
                         }
+
                         for (let i = 0; i < response.data.guesses[row].white_pegs; i++) {
                             arr.push('white')
                         }
+
                         while(arr.length < this.getCurrentGame.num_slots) {
                             arr.push('')
                         }
+
                         this.$store.commit('setRowPegs', {
                             row,
                             arr
                         });
-
                     })
                 }
             }
