@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <div v-if="!getCurrentGame.status || getCurrentGame.status === 'running'">
+        <div class="buttons-container" v-if="getCurrentGame.status === 'running'">
             <a v-on:click="confirmGuess" class="confirm shadow" :class="confirmIsDisabled ? ' disabled' : ''">
                 <img src="../assets/icons/check.png" height="20px" width="20px"/>
             </a>
@@ -38,6 +38,7 @@
 
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
+                    console.log(this.getCurrentGame.secret_code)
                 })
             },
 
@@ -87,9 +88,8 @@
         },
         computed: {
             ...mapGetters([
-                'getCurrentGame',
                 'getGrid',
-                'getPegs'
+                'getCurrentGame'
             ]),
             confirmIsDisabled() {
                 let row = this.getCurrentGame.guesses.length
@@ -121,17 +121,21 @@
         position: relative;
         padding: 10px 0;
 
-        .confirm, .reset {
-            cursor: pointer;
-            display: block;
-            background: white;
-            border-radius: 15px;
-            padding: 5px;
-            margin: 5px 0;
-            width: 35px;
+        .buttons-container {
+            position: absolute;
 
-            &.disabled {
-                opacity: .6;
+            .confirm, .reset {
+                cursor: pointer;
+                display: block;
+                background: white;
+                border-radius: 15px;
+                padding: 5px;
+                margin: 5px 0;
+                width: 35px;
+
+                &.disabled {
+                    opacity: .6;
+                }
             }
         }
 
@@ -192,8 +196,8 @@
             .new-game-cta {
                 position: absolute;
                 bottom: 0;
+                left: 55px;
                 min-width: 105px;
-                margin-left: 40px;
             }
         }
     }

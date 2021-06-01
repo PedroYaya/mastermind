@@ -136,6 +136,11 @@
             padding: 10px;
 
             .guess-row {
+
+                .row-index {
+                    padding: 0 20px;
+                }
+
                 .guess {
                     margin: 0px 15px;
 
