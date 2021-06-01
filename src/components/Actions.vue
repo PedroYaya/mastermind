@@ -41,17 +41,15 @@
             },
 
             confirmGuess () {
-                let game = this.getCurrentGame
-                let rowGuess = this.getRowGuess
-                const id = game.id;
+                const id = this.getCurrentGame.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
 
                 const guess = {
                     code: []
                 }
 
-                for (var i in rowGuess) {
-                    guess.code.push(rowGuess[i])
+                for (var i in this.getRowGuess) {
+                    guess.code.push(this.getRowGuess[i])
                 }
 
                 if (!this.isDisabled) {
