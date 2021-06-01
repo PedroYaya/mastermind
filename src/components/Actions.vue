@@ -3,7 +3,7 @@
         <a v-on:click="confirmGuess" class="confirm shadow" :class="isDisabled ? ' disabled' : ''">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
-        <a v-on:click="newGame()" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
+        <a v-on:click="newGame" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
             <img src="../assets/icons/reset.png" height="20px" width="20px"/>
         </a>
         <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
