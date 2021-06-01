@@ -1,11 +1,13 @@
 <template>
     <div class="actions">
-        <a v-on:click="confirmGuess" class="confirm shadow" :class="confirmIsDisabled ? ' disabled' : ''">
-            <img src="../assets/icons/check.png" height="20px" width="20px"/>
-        </a>
-        <a v-on:click="resetGame" class="reset shadow" :class="resetIsDisabled ? ' disabled' : ''">
-            <img src="../assets/icons/reset.png" height="20px" width="20px"/>
-        </a>
+        <div v-if="!getCurrentGame.status || getCurrentGame.status === 'running'">
+            <a v-on:click="confirmGuess" class="confirm shadow" :class="confirmIsDisabled ? ' disabled' : ''">
+                <img src="../assets/icons/check.png" height="20px" width="20px"/>
+            </a>
+            <a v-on:click="resetGame" class="reset shadow" :class="resetIsDisabled ? ' disabled' : ''">
+                <img src="../assets/icons/reset.png" height="20px" width="20px"/>
+            </a>
+        </div>
         <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
             <h3 :class="getCurrentGame.status">{{ getCurrentGame.status }}</h3>
             <span>Solution:</span>
@@ -133,7 +135,7 @@
         }
 
         .results {
-            margin-top: 70px;
+            margin-top: 120px;
 
             h3 {
                 font-weight: 800;
