@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from "axios";
 
 Vue.use(Vuex)
 
@@ -8,13 +9,13 @@ export default new Vuex.Store({
         currentGame: {},
         unitGuess: '',
         gridGuess: [],
-        pegs: []
+        pegs: [],
+        gameIsDisabled: true
     },
     mutations: {
 
         setCurrentGame(state, payload) {
             state.currentGame = payload
-            console.log(state.currentGame)
         },
 
         setUnitGuess(state, payload) {
@@ -46,7 +47,29 @@ export default new Vuex.Store({
                     state.gridGuess[i].push('')
                 }
             }
-            console.log(state.gridGuess)
+        },
+
+        setGameIsDisabled(state, payload) {
+            state.gameIsDisabled = payload
+        }
+    },
+    actions: {
+        newGame(state, payload) {
+            const url = 'http://localhost:8000/api/games/';
+            const game = {
+                'num_colors': 4,
+                'num_slots': 4,
+                'max_guesses': 8
+            }
+
+            axios.post(url, game).then( (response) => {
+                this.commit('setCurrentGame', response.data)
+                this.commit('resetGame')
+            })
+
+            if (payload) {
+                this.commit('setGameIsDisabled', false)
+            }
         }
     },
     getters: {
@@ -54,5 +77,6 @@ export default new Vuex.Store({
         getGrid: state => state.gridGuess,
         getUnitGuess: state => state.unitGuess,
         getPegs: state => state.pegs,
+        getGameIsDisabled: state => state.gameIsDisabled,
     }
 })

@@ -28,18 +28,7 @@
         methods: {
 
             newGame() {
-                const url = 'http://localhost:8000/api/games/';
-                const game = {
-                    'num_colors': 4,
-                    'num_slots': 4,
-                    'max_guesses': 8
-                }
-
-                this.$store.commit('resetGame')
-
-                axios.post(url, game).then( (response) => {
-                    this.$store.commit('setCurrentGame', response.data)
-                })
+                this.$store.dispatch('newGame',true)
             },
 
             reset() {

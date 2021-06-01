@@ -2,7 +2,7 @@
     <div class="board shadow">
         <div v-for="(row, i) in getGrid" :key="'row-'+i" class="guess-row">
             <h2 class="row-index"
-                :class="[activeRow === i && getCurrentGame.status === 'running' ? ' enabled' : '']">
+                :class="[activeRow === i && getCurrentGame.status === 'running' && !getGameIsDisabled ? ' enabled' : '']">
                 0{{ i + 1 }}
             </h2>
             <div class="guess">
@@ -28,19 +28,19 @@
 
 <script>
     import { mapGetters } from 'vuex'
-    import axios from "axios";
 
     export default {
         name: 'Board',
         beforeMount() {
-            this.preServeGame()
+            this.$store.dispatch('newGame')
         },
         computed: {
             ...mapGetters([
                 'getCurrentGame',
                 'getUnitGuess',
                 'getGrid',
-                'getPegs'
+                'getPegs',
+                'getGameIsDisabled'
             ]),
             activeRow(){
                if (this.getCurrentGame.disabled) {
@@ -52,7 +52,7 @@
         },
         methods: {
             guessUnit(i, j) {
-                if (i === this.activeRow) {
+                if (i === this.activeRow && !this.getGameIsDisabled) {
                     let arr = this.getGrid[i]
                     arr.splice(j, 1, this.getUnitGuess)
 
@@ -62,21 +62,6 @@
                         arr
                     })
                 }
-            },
-
-            preServeGame() {
-
-                const url = 'http://localhost:8000/api/games/';
-                const game = {
-                    'num_colors': 4,
-                    'num_slots': 4,
-                    'max_guesses': 8
-                }
-
-                axios.post(url, game).then( (response) => {
-                    this.$store.commit('setCurrentGame', response.data)
-                    this.$store.commit('resetGame')
-                })
             }
         }
     }
