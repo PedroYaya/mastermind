@@ -17,7 +17,6 @@ export default new Vuex.Store({
         },
         setUnitGuess(state, payload) {
             state.unitGuess = payload
-            console.log(state.unitGuess)
         },
         setRowGuess(state, payload) {
             state.rowGuess = payload

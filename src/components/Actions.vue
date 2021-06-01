@@ -34,7 +34,7 @@
                     'max_guesses': 8
                 }
 
-                this.$store.commit('restartRowGuess')
+                this.$store.commit('initializeGrid')
 
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
@@ -92,12 +92,9 @@
                 'getPegs'
             ]),
             confirmIsDisabled() {
-                let disabled = false
-
                 let row = this.getCurrentGame.guesses.length
-
-
-                this.getRowGuess.forEach(e => {
+                let disabled = false
+                this.getGrid[row].forEach(e => {
                     if (e === '') {
                         disabled = true
                     }
@@ -105,8 +102,9 @@
                 return disabled
             },
             resetIsDisabled() {
+                let row = this.getCurrentGame.guesses.length
                 let disabled = true
-                this.getRowGuess.forEach(e => {
+                this.getGrid[row].forEach(e => {
                     if (e !== '') {
                         disabled = false
                     }
