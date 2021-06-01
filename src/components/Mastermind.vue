@@ -1,6 +1,6 @@
 <template>
     <div class="mastermind">
-        <h1>Mastermind</h1>
+        <h2>Mastermind</h2>
 
         <div class="game-container">
             <Colors/>
@@ -28,9 +28,18 @@
 <style lang="scss">
 
     .game-container {
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 10% 80% 10%;
         padding: 5px;
+        width: 100%;
+        margin: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+        .game-container {
+            min-width: 500px;
+            width: fit-content;
+        }
     }
 
     h2 {

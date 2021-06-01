@@ -190,13 +190,43 @@
     }
 
 
+    @media screen and (max-width: 767px) {
+        .actions {
+            .results {
+                position: fixed;
+                background: white;
+                padding: 10px;
+                left: 30%;
+                right: 30%;
+                border-radius: 10px;
+                -webkit-box-shadow: 0px 3px 15px 0px #000000;
+                box-shadow: 0px 3px 15px -5px #000000;
+
+                h3 {
+                    text-align: center;
+                }
+
+                .solution {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
     @media screen and (min-width: 768px) {
 
         .actions {
+
+            .results {
+                top: 30%;
+                position: absolute;
+                margin-left: 20px;
+            }
+
             .new-game-cta {
                 position: absolute;
                 bottom: 0;
-                left: 55px;
+                left: 70px;
                 min-width: 105px;
             }
         }

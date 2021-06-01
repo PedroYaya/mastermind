@@ -133,7 +133,7 @@
     @media screen and (min-width: 768px) {
 
         .board {
-            padding: 10px;
+            padding: 20px;
 
             .guess-row {
 
