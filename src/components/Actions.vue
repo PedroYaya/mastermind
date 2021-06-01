@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <New @newGame="newGame"/>
+        <New @newGame="newGame" text="New Game" />
     </div>
 </template>
 

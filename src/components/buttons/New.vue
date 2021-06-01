@@ -1,10 +1,11 @@
 <template>
-    <a v-on:click="newGame" class="new-game shadow">New Game</a>
+    <a v-on:click="newGame" class="new-game shadow">{{ text }}</a>
 </template>
 
 <script>
     export default {
         name: 'New',
+        props: ['text'],
         methods: {
             newGame() {
                 this.$emit('newGame')
