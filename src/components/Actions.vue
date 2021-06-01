@@ -42,6 +42,7 @@
 
             confirmGuess () {
                 let game = this.getCurrentGame
+                let rowGuess = this.getRowGuess
                 const id = game.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
 
@@ -49,8 +50,8 @@
                     code: []
                 }
 
-                for (var i in this.$store.getters.getRowGuess) {
-                    guess.code.push(this.$store.getters.getRowGuess[i])
+                for (var i in rowGuess) {
+                    guess.code.push(rowGuess[i])
                 }
 
                 if (!this.isDisabled) {
@@ -82,11 +83,12 @@
         computed: {
             ...mapGetters([
                 'getCurrentGame',
+                'getRowGuess',
                 'getPegs'
             ]),
             isDisabled() {
                 let disabled = false
-                this.$store.getters.getRowGuess.forEach(e => {
+                this.getRowGuess.forEach(e => {
                     if (e === '') {
                         disabled = true
                     }
