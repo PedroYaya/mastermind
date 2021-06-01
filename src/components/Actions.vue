@@ -1,9 +1,9 @@
 <template>
     <div class="actions">
-        <a v-on:click="confirmGuess" class="confirm shadow" :class="isDisabled ? ' disabled' : ''">
+        <a v-on:click="confirmGuess" class="confirm shadow" :class="confirmIsDisabled ? ' disabled' : ''">
             <img src="../assets/icons/check.png" height="20px" width="20px"/>
         </a>
-        <a v-on:click="newGame" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
+        <a v-on:click="resetGame" class="reset shadow" :class="resetIsDisabled ? ' disabled' : ''">
             <img src="../assets/icons/reset.png" height="20px" width="20px"/>
         </a>
         <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
@@ -24,7 +24,8 @@
     export default {
         name: 'Actions',
         methods: {
-            newGame () {
+            newGame() {
+                console.log('dale pa')
                 const url = 'http://localhost:8000/api/games/';
                 const game = {
                     'num_colors': 4,
@@ -40,7 +41,13 @@
                 })
             },
 
-            confirmGuess () {
+            resetGame() {
+                if (!this.resetIsDisabled) {
+                    this.newGame()
+                }
+            },
+
+            confirmGuess() {
                 const id = this.getCurrentGame.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
 
@@ -50,7 +57,7 @@
                     guess.code.push(this.getRowGuess[i])
                 }
 
-                if (!this.isDisabled) {
+                if (!this.confirmIsDisabled) {
                     axios.post(url, guess).then( (response) => {
                         this.$store.commit('setCurrentGame', response.data)
                         this.$store.commit('restartRowGuess')
@@ -84,11 +91,20 @@
                 'getRowGuess',
                 'getPegs'
             ]),
-            isDisabled() {
+            confirmIsDisabled() {
                 let disabled = false
                 this.getRowGuess.forEach(e => {
                     if (e === '') {
                         disabled = true
+                    }
+                })
+                return disabled
+            },
+            resetIsDisabled() {
+                let disabled = true
+                this.getRowGuess.forEach(e => {
+                    if (e !== '') {
+                        disabled = false
                     }
                 })
                 return disabled
