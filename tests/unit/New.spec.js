@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import New from '@/components/buttons/New.vue'
 
-describe('File.vue', () => {
+describe('New.vue', () => {
     it('renders props when passed', () => {
         const text = 'click here'
         const wrapper = shallowMount(New, {
