@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        currentGame: {"disabled": true, "colors": ['red', 'blue', 'green', 'yellow'], "guesses": [], "num_colors": 4, "max_guesses": 8, "num_slots": 4},
+        currentGame: {},
         unitGuess: '',
         gridGuess: [],
         pegs: []
@@ -14,6 +14,7 @@ export default new Vuex.Store({
 
         setCurrentGame(state, payload) {
             state.currentGame = payload
+            console.log(state.currentGame)
         },
 
         setUnitGuess(state, payload) {
@@ -45,6 +46,7 @@ export default new Vuex.Store({
                     state.gridGuess[i].push('')
                 }
             }
+            console.log(state.gridGuess)
         }
     },
     getters: {

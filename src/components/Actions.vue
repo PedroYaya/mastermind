@@ -4,7 +4,7 @@
             <a v-on:click="confirmGuess" class="confirm shadow" :class="confirmIsDisabled ? ' disabled' : ''">
                 <img src="../assets/icons/check.png" height="20px" width="20px"/>
             </a>
-            <a v-on:click="resetGame" class="reset shadow" :class="resetIsDisabled ? ' disabled' : ''">
+            <a v-on:click="reset" class="reset shadow" :class="resetIsDisabled ? ' disabled' : ''">
                 <img src="../assets/icons/reset.png" height="20px" width="20px"/>
             </a>
         </div>
@@ -39,11 +39,10 @@
 
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
-                    console.log(this.getCurrentGame.secret_code)
                 })
             },
 
-            resetGame() {
+            reset() {
                 if (!this.resetIsDisabled) {
                     this.newGame()
                 }

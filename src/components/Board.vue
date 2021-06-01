@@ -28,9 +28,13 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import axios from "axios";
 
     export default {
         name: 'Board',
+        beforeMount() {
+            this.preServeGame()
+        },
         computed: {
             ...mapGetters([
                 'getCurrentGame',
@@ -58,10 +62,22 @@
                         arr
                     })
                 }
+            },
+
+            preServeGame() {
+
+                const url = 'http://localhost:8000/api/games/';
+                const game = {
+                    'num_colors': 4,
+                    'num_slots': 4,
+                    'max_guesses': 8
+                }
+
+                axios.post(url, game).then( (response) => {
+                    this.$store.commit('setCurrentGame', response.data)
+                    this.$store.commit('resetGame')
+                })
             }
-        },
-        beforeMount() {
-            this.$store.commit('resetGame')
         }
     }
 </script>
