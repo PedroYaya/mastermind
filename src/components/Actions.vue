@@ -55,6 +55,24 @@
                     axios.post(url, guess).then( (response) => {
                         this.$store.commit('setCurrentGame', response.data)
                         this.$store.commit('restartRowGuess')
+
+                        let arr = []
+                        let row = this.getCurrentGame.guesses.length -1
+
+                        for (let i = 0; i < response.data.guesses[row].black_pegs; i++) {
+                            arr.push('black')
+                        }
+                        for (let i = 0; i < response.data.guesses[row].white_pegs; i++) {
+                            arr.push('white')
+                        }
+                        while(arr.length < this.getCurrentGame.num_slots) {
+                            arr.push('')
+                        }
+                        this.$store.commit('setRowPegs', {
+                            row,
+                            arr
+                        });
+
                     })
                 }
             }
