@@ -11,7 +11,8 @@
                 <div v-for="(color, i) in getCurrentGame.secret_code" :key="i" class="slot" :style="{background: color}"></div>
             </div>
         </div>
-        <a v-on:click="newGame" class="new-game-cta shadow">New Game</a>
+
+        <New @newGame="newGame"/>
     </div>
 </template>
 
@@ -20,12 +21,14 @@
     import { mapGetters } from 'vuex'
     import Confirm from './buttons/Confirm'
     import Reset from './buttons/Reset'
+    import New from './buttons/New'
 
     export default {
         name: 'Actions',
         components: {
             Confirm,
-            Reset
+            Reset,
+            New
         },
         methods: {
 
@@ -162,20 +165,6 @@
             }
         }
 
-        .new-game-cta {
-            cursor: pointer;
-            position: fixed;
-            left: 50%;
-            transform: translate(-50%, 0);
-            bottom: 10%;
-            font-weight: 500;
-            background: white;
-            border-radius: 25px;
-            padding: 10px;
-            text-decoration: none;
-            line-height: 20px;
-        }
-
     }
 
 
@@ -210,13 +199,6 @@
                 top: 30%;
                 position: absolute;
                 margin-left: 20px;
-            }
-
-            .new-game-cta {
-                position: absolute;
-                bottom: 0;
-                left: 70px;
-                min-width: 105px;
             }
         }
     }
