@@ -133,6 +133,7 @@
 
         .results {
             margin-top: 120px;
+            text-align: left;
 
             h3 {
                 font-weight: 800;
@@ -156,8 +157,8 @@
             .solution {
                 display: flex;
                 .slot {
-                    width: 10px;
-                    height: 10px;
+                    width: 15px;
+                    height: 15px;
                     background: green;
                     margin: 3px;
                     border-radius: 20px;
@@ -176,6 +177,7 @@
                 padding: 10px;
                 left: 30%;
                 right: 30%;
+                text-align: center;
                 border-radius: 10px;
                 -webkit-box-shadow: 0px 3px 15px 0px #000000;
                 box-shadow: 0px 3px 15px -5px #000000;
