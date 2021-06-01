@@ -36,11 +36,13 @@
 
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)
+                    console.log(this.getCurrentGame.secret_code)
                 })
             },
 
             confirmGuess () {
-                const id = this.$store.getters.getCurrentGame.id;
+                let game = this.getCurrentGame
+                const id = game.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
 
                 const guess = {
