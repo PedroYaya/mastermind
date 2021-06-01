@@ -64,6 +64,7 @@ export default new Vuex.Store({
 
             axios.post(url, game).then( (response) => {
                 this.commit('setCurrentGame', response.data)
+                console.log(response.data.secret_code)
                 this.commit('resetGame')
             })
 

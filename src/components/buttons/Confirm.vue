@@ -1,0 +1,37 @@
+<template>
+    <a v-on:click="confirmGuess" class="confirm shadow" :class="isDisabled ? ' disabled' : ''">
+        <img src="../../assets/icons/check.png" height="20px" width="20px"/>
+    </a>
+</template>
+
+<script>
+    export default {
+        name: 'Confirm',
+        props: {
+            isDisabled: Boolean
+        },
+        methods: {
+            confirmGuess() {
+                this.$emit('confirmGuess')
+            }
+        }
+    }
+</script>
+
+<style lang="scss">
+
+    .confirm {
+        cursor: pointer;
+        display: block;
+        background: white;
+        border-radius: 15px;
+        padding: 5px;
+        margin: 5px 0;
+        width: 35px;
+
+        &.disabled {
+            opacity: .6;
+        }
+    }
+
+</style>

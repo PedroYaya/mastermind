@@ -1,12 +1,8 @@
 <template>
     <div class="actions">
         <div class="buttons-container" v-if="getCurrentGame.status === 'running'">
-            <a v-on:click="confirmGuess" class="confirm shadow" :class="confirmIsDisabled ? ' disabled' : ''">
-                <img src="../assets/icons/check.png" height="20px" width="20px"/>
-            </a>
-            <a v-on:click="reset" class="reset shadow" :class="resetIsDisabled ? ' disabled' : ''">
-                <img src="../assets/icons/reset.png" height="20px" width="20px"/>
-            </a>
+            <Confirm @confirmGuess="confirmGuess" :isDisabled="confirmIsDisabled"/>
+            <Reset @reset="reset" :isDisabled="resetIsDisabled"/>
         </div>
         <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
             <h3 :class="getCurrentGame.status">{{ getCurrentGame.status }}</h3>
@@ -22,9 +18,15 @@
 <script>
     import axios from 'axios'
     import { mapGetters } from 'vuex'
+    import Confirm from './buttons/Confirm'
+    import Reset from './buttons/Reset'
 
     export default {
         name: 'Actions',
+        components: {
+            Confirm,
+            Reset
+        },
         methods: {
 
             newGame() {
