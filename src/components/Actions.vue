@@ -50,12 +50,13 @@
             confirmGuess() {
                 const id = this.getCurrentGame.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
+                let row = this.getCurrentGame.guesses.length
 
                 const guess = { code: [] }
 
-                for (var i in this.getRowGuess) {
-                    guess.code.push(this.getRowGuess[i])
-                }
+                this.getGrid[row].forEach(e => {
+                    guess.code.push(e)
+                })
 
                 if (!this.confirmIsDisabled) {
                     axios.post(url, guess).then( (response) => {
@@ -63,7 +64,6 @@
                         this.$store.commit('restartRowGuess')
 
                         let arr = []
-                        let row = this.getCurrentGame.guesses.length -1
 
                         for (let i = 0; i < response.data.guesses[row].black_pegs; i++) {
                             arr.push('black')
