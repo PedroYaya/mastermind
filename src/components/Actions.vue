@@ -25,7 +25,6 @@
         name: 'Actions',
         methods: {
             newGame() {
-                console.log('dale pa')
                 const url = 'http://localhost:8000/api/games/';
                 const game = {
                     'num_colors': 4,
