@@ -151,8 +151,11 @@
 
         .new-game-cta {
             cursor: pointer;
-            position: absolute;
-            bottom: 1px;
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%, 0);
+            bottom: 10%;
+            font-weight: 500;
             background: white;
             border-radius: 25px;
             padding: 10px;
@@ -167,7 +170,10 @@
 
         .actions {
             .new-game-cta {
-                left: 10px;
+                position: absolute;
+                bottom: 0;
+                min-width: 105px;
+                margin-left: 40px;
             }
         }
     }
