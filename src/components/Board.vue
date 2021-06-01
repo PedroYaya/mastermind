@@ -61,9 +61,7 @@
             }
         },
         beforeMount() {
-            this.$store.commit('initializeGrid')
-            this.$store.commit('restartRowGuess')
-            this.$store.commit('setInitialPegs')
+            this.$store.commit('resetGame')
         }
     }
 </script>

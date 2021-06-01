@@ -26,6 +26,7 @@
     export default {
         name: 'Actions',
         methods: {
+
             newGame() {
                 const url = 'http://localhost:8000/api/games/';
                 const game = {
@@ -34,7 +35,7 @@
                     'max_guesses': 8
                 }
 
-                this.$store.commit('initializeGrid')
+                this.$store.commit('resetGame')
 
                 axios.post(url, game).then( (response) => {
                     this.$store.commit('setCurrentGame', response.data)

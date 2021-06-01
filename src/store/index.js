@@ -12,22 +12,43 @@ export default new Vuex.Store({
         pegs: []
     },
     mutations: {
+
         setCurrentGame(state, payload) {
             state.currentGame = payload
         },
+
         setUnitGuess(state, payload) {
             state.unitGuess = payload
         },
+
         setRowGuess(state, payload) {
             state.rowGuess = payload
         },
+
         restartRowGuess(state) {
             state.rowGuess = []
             for (let i = 0; i < state.currentGame.num_slots; i++) {
                 state.rowGuess.push('')
             }
         },
-        initializeGrid (state) {
+
+        setGrid(state, { row, arr}) {
+            state.gridGuess[row] = arr
+        },
+
+        setRowPegs(state, { row, arr}) {
+            state.pegs[row] = arr
+        },
+
+        resetGame(state) {
+            state.pegs = []
+            for (let i = 0; i < state.currentGame.max_guesses; i++) {
+                let score = []
+                for (let j = 0; j < state.currentGame.num_slots; j++) {
+                    score.push('')
+                }
+                state.pegs.push(score)
+            }
             state.gridGuess = []
             for (let i = 0; i < state.currentGame.max_guesses; i++) {
                 let arr = []
@@ -36,21 +57,6 @@ export default new Vuex.Store({
                     state.gridGuess[i].push('')
                 }
             }
-        },
-        setGrid(state, { row, arr}) {
-            state.gridGuess[row] = arr
-        },
-        setInitialPegs(state) {
-            for (let i = 0; i < state.currentGame.max_guesses; i++) {
-                let score = []
-                for (let j = 0; j < state.currentGame.num_slots; j++) {
-                    score.push('')
-                }
-                state.pegs.push(score)
-            }
-        },
-        setRowPegs(state, { row, arr}) {
-            state.pegs[row] = arr
         }
     },
     getters: {
