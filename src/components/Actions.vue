@@ -22,6 +22,7 @@
     import Confirm from './buttons/Confirm'
     import Reset from './buttons/Reset'
     import New from './buttons/New'
+    import { getGame } from '../store/constants'
 
     export default {
         name: 'Actions',
@@ -82,7 +83,7 @@
         computed: {
             ...mapGetters([
                 'getGrid',
-                'getCurrentGame'
+                getGame
             ]),
             confirmIsDisabled() {
                 let row = this.getCurrentGame.guesses.length
