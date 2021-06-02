@@ -2,7 +2,7 @@
     <div class="board shadow">
         <div v-for="(row, i) in getGrid" :key="'row-'+i" class="guess-row">
             <h2 class="row-index"
-                :class="[activeRow === i && getCurrentGame.status === 'running' && !getGameIsDisabled ? ' enabled' : '']">
+                :class="[rowIndex !== i || getGameIsDisabled ? ' disabled' : '']">
                 0{{ i + 1 }}
             </h2>
             <div class="guess">
@@ -47,17 +47,13 @@
                 getPegs,
                 getGameIsDisabled
             ]),
-            activeRow(){
-               if (this.getCurrentGame.disabled) {
-                   return false
-               } else {
-                   return this.getCurrentGame.guesses.length
-               }
+            rowIndex(){
+                return this.getCurrentGame.guesses.length
             }
         },
         methods: {
             guessUnit(i, j) {
-                if (i === this.activeRow && !this.getGameIsDisabled) {
+                if (i === this.rowIndex && !this.getGameIsDisabled) {
                     let arr = this.getGrid[i]
                     arr.splice(j, 1, this.getUnitGuess)
 
@@ -88,11 +84,11 @@
         padding: 5px;
 
         .row-index {
-            color: #e2e2e2;
+            color: gray;
             margin: 0;
 
-            &.enabled {
-                color: gray;
+            &.disabled {
+                color: #e2e2e2;
             }
         }
 
