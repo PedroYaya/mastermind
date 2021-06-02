@@ -28,6 +28,11 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import { getCurrentGame } from '../store/constants'
+    import { getUnitGuess } from '../store/constants'
+    import { getGrid } from '../store/constants'
+    import { getPegs } from '../store/constants'
+    import { getGameIsDisabled } from '../store/constants'
 
     export default {
         name: 'Board',
@@ -36,11 +41,11 @@
         },
         computed: {
             ...mapGetters([
-                'getCurrentGame',
-                'getUnitGuess',
-                'getGrid',
-                'getPegs',
-                'getGameIsDisabled'
+                getCurrentGame,
+                getUnitGuess,
+                getGrid,
+                getPegs,
+                getGameIsDisabled
             ]),
             activeRow(){
                if (this.getCurrentGame.disabled) {

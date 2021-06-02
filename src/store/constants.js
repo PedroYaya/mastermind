@@ -1,2 +1,5 @@
 export const getCurrentGame = "getCurrentGame"
+export const getUnitGuess = "getUnitGuess"
 export const getGrid = "getGrid"
+export const getPegs = "getPegs"
+export const getGameIsDisabled = "getGameIsDisabled"

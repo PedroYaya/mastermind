@@ -10,12 +10,13 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import { getCurrentGame } from '../store/constants'
 
     export default {
         name: 'Colors',
         computed: {
             ...mapGetters([
-                'getCurrentGame'
+                getCurrentGame
             ])
         },
         methods: {
