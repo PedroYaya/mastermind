@@ -1,9 +1,9 @@
 <template>
     <div class="mastermind">
 
-        <div class="title-container" :class="!getGameIsDisabled && getCurrentGame.status === 'running' ? ' reference' : ''">
+        <div class="title-container" :class="!getGameIsDisabled ? ' reference' : ''">
             <h2>Mastermind</h2>
-            <p v-if="!getGameIsDisabled && getCurrentGame.status === 'running'">
+            <p v-if="!getGameIsDisabled">
                 Game reference <br> {{ getCurrentGame.reference}}
             </p>
         </div>
@@ -37,7 +37,7 @@
             ...mapGetters([
                 getCurrentGame,
                 getGameIsDisabled
-            ]),
+            ])
         }
     }
 </script>
