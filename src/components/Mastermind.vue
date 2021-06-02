@@ -21,6 +21,9 @@
     import Board from "./Board";
     import Actions from "./Actions";
     import { mapGetters } from 'vuex'
+    import { getCurrentGame } from '../store/constants'
+    import { getGameIsDisabled } from '../store/constants'
+
 
     export default {
         name: 'Mastermind',
@@ -31,8 +34,8 @@
         },
         computed: {
             ...mapGetters([
-                'getCurrentGame',
-                'getGameIsDisabled'
+                getCurrentGame,
+                getGameIsDisabled
             ]),
         }
     }
