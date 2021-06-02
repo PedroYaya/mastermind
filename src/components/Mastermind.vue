@@ -13,6 +13,7 @@
             <Board/>
             <Actions/>
         </div>
+
     </div>
 </template>
 
