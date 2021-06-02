@@ -19,10 +19,11 @@
 <script>
     import axios from 'axios'
     import { mapGetters } from 'vuex'
+    import { getCurrentGame } from '../store/constants'
+    import { getGrid } from '../store/constants'
     import Confirm from './buttons/Confirm'
     import Reset from './buttons/Reset'
     import New from './buttons/New'
-    import { getGame } from '../store/constants'
 
     export default {
         name: 'Actions',
@@ -82,8 +83,8 @@
         },
         computed: {
             ...mapGetters([
-                'getGrid',
-                getGame
+                getGrid,
+                getCurrentGame
             ]),
             confirmIsDisabled() {
                 let row = this.getCurrentGame.guesses.length
