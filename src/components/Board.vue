@@ -1,10 +1,12 @@
 <template>
     <div class="board shadow">
         <div v-for="(row, i) in getGrid" :key="'row-'+i" class="guess-row">
+
             <h2 class="row-index"
                 :class="[rowIndex !== i || getGameIsDisabled ? ' disabled' : '']">
                 0{{ i + 1 }}
             </h2>
+
             <div class="guess">
                 <a v-for="(guess, j) in getGrid[i]"
                    :key="'guess-'+j"
@@ -13,6 +15,7 @@
                    class="index">
                 </a>
             </div>
+
             <div class="result">
                 <div class="pegs-row">
                     <div v-for="(peg, k) in getPegs[i]"
@@ -22,6 +25,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
