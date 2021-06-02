@@ -44,11 +44,6 @@
         display: flex;
         justify-content: center;
 
-        &.reference {
-            position: relative;
-            left: 49px;
-        }
-
         p {
             font-size: 13px;
             line-height: 16px;
@@ -66,6 +61,14 @@
     }
 
     @media screen and (min-width: 768px) {
+
+        .title-container {
+            &.reference {
+                position: relative;
+                left: 49px;
+            }
+        }
+
         .game-container {
             min-width: 500px;
             width: fit-content;
