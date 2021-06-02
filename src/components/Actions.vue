@@ -1,14 +1,20 @@
 <template>
     <div class="actions">
-        <div class="buttons-container" v-if="getCurrentGame.status === 'running'">
+
+        <div class="buttons-container" v-if="!getGameIsDisabled">
             <Confirm @confirmGuess="confirmGuess" :isDisabled="confirmIsDisabled"/>
             <Reset @reset="reset" :isDisabled="resetIsDisabled"/>
         </div>
-        <div v-if="getCurrentGame.status && getCurrentGame.status !== 'running'" class="results">
+
+        <div v-if="gameIsFinished" class="results">
+
             <h3 :class="getCurrentGame.status">{{ getCurrentGame.status }}</h3>
+
             <span>Solution:</span>
             <div class="solution">
-                <div v-for="(color, i) in getCurrentGame.secret_code" :key="i" class="slot" :style="{background: color}"></div>
+                <div v-for="(color, i) in getCurrentGame.secret_code"
+                     :key="i" class="slot" :style="{background: color}">
+                </div>
             </div>
         </div>
 
@@ -21,6 +27,7 @@
     import { mapGetters } from 'vuex'
     import { getCurrentGame } from '../store/constants'
     import { getGrid } from '../store/constants'
+    import { getGameIsDisabled } from '../store/constants'
     import Confirm from './buttons/Confirm'
     import Reset from './buttons/Reset'
     import New from './buttons/New'
@@ -51,24 +58,20 @@
 
                 const guess = { code: [] }
 
-                this.getGrid[row].forEach(e => {
-                    guess.code.push(e)
-                })
+                this.getGrid[row].forEach(e => { guess.code.push(e) })
 
                 if (!this.confirmIsDisabled) {
                     axios.post(url, guess).then( (response) => {
+
                         this.$store.commit('setCurrentGame', response.data)
 
                         let arr = []
-
                         for (let i = 0; i < response.data.guesses[row].black_pegs; i++) {
                             arr.push('black')
                         }
-
                         for (let i = 0; i < response.data.guesses[row].white_pegs; i++) {
                             arr.push('white')
                         }
-
                         while(arr.length < this.getCurrentGame.num_slots) {
                             arr.push('')
                         }
@@ -84,8 +87,10 @@
         computed: {
             ...mapGetters([
                 getGrid,
-                getCurrentGame
+                getCurrentGame,
+                getGameIsDisabled
             ]),
+
             confirmIsDisabled() {
                 let row = this.getCurrentGame.guesses.length
                 let disabled = false
@@ -96,6 +101,7 @@
                 })
                 return disabled
             },
+
             resetIsDisabled() {
                 let disabled = true
                 this.getGrid[0].forEach(e => {
@@ -104,6 +110,10 @@
                     }
                 })
                 return disabled
+            },
+
+            gameIsFinished() {
+                return this.getCurrentGame.status && this.getCurrentGame.status !== 'running'
             }
         }
     }
