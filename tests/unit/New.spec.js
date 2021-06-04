@@ -11,7 +11,5 @@ describe('New.vue', () => {
         })
 
         expect(wrapper.text()).toContain(text)
-        //expect(document.getElementsByClassName('new-game')[0].innerHTML).toBe((wrapper.vm.$props.text))
-
     })
 })
