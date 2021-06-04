@@ -3,7 +3,7 @@
         <button  v-for="(color, i) in getCurrentGame.colors" :key="i"
             v-on:click="setUnitGuess(i)"
             :style="{background: color}"
-            :class="active === i ? ' active ' + color  : ''"
+            :class="getActive === i ? ' active ' + color  : ''"
             class="color">
         </button>
     </div>
@@ -12,22 +12,19 @@
 <script>
     import { mapGetters } from 'vuex'
     import { getCurrentGame } from '../store/constants'
+    import { getActive } from '../store/constants'
 
     export default {
         name: 'Colors',
-        data() {
-            return {
-                active: ''
-            }
-        },
         computed: {
             ...mapGetters([
                 getCurrentGame,
+                getActive
             ])
         },
         methods: {
             setUnitGuess(i) {
-                this.active = i
+                this.$store.commit('setActive', i)
                 this.$store.commit('setUnitGuess', this.getCurrentGame.colors[i])
             }
         }

@@ -7,15 +7,21 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         currentGame: {},
+        active: '',
         unitGuess: '',
         gridGuess: [],
         pegs: [],
-        gameIsDisabled: true
+        gameIsDisabled: true,
     },
     mutations: {
 
         setCurrentGame(state, payload) {
             state.currentGame = payload
+        },
+
+        setActive(state, payload) {
+            state.active = payload
+            console.log(state.active)
         },
 
         setUnitGuess(state, payload) {
@@ -28,6 +34,10 @@ export default new Vuex.Store({
 
         setRowPegs(state, { row, arr}) {
             state.pegs[row] = arr
+        },
+
+        setGameIsDisabled(state, payload) {
+            state.gameIsDisabled = payload
         },
 
         resetGame(state) {
@@ -47,10 +57,6 @@ export default new Vuex.Store({
                     state.gridGuess[i].push('')
                 }
             }
-        },
-
-        setGameIsDisabled(state, payload) {
-            state.gameIsDisabled = payload
         }
     },
     actions: {
@@ -75,8 +81,9 @@ export default new Vuex.Store({
     },
     getters: {
         getCurrentGame: state => state.currentGame,
-        getGrid: state => state.gridGuess,
+        getActive: state => state.active,
         getUnitGuess: state => state.unitGuess,
+        getGrid: state => state.gridGuess,
         getPegs: state => state.pegs,
         getGameIsDisabled: state => state.gameIsDisabled,
     }

@@ -60,6 +60,7 @@
                     axios.post(url, guess).then( (response) => {
 
                         this.$store.commit('setCurrentGame', response.data)
+                        this.$store.commit('setActive')
 
                         let arr = []
                         for (let i = 0; i < response.data.guesses[row].black_pegs; i++) {

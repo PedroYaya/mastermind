@@ -61,6 +61,7 @@
         grid-template-columns: 10% 75% 15%;
         padding: 5px;
         width: 100%;
+        max-width: 500px;
         margin: auto;
     }
 

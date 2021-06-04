@@ -77,7 +77,7 @@
     .board {
         background: white;
         border-radius: 7px;
-        margin: 0 10px;
+        margin: auto;
         padding: 5px;
     }
 

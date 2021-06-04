@@ -17,10 +17,14 @@ describe('Colors.vue', () => {
                 return {
                     colors: ['red', 'yellow', 'blue', 'green']
                 }
+            },
+            getActive() {
+                return 0
             }
         }
         mutations = {
             setUnitGuess: jest.fn(),
+            setActive: jest.fn()
         }
         store = new Vuex.Store({
             getters,
