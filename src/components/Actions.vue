@@ -92,24 +92,18 @@
             ]),
 
             confirmIsDisabled() {
-                let row = this.getCurrentGame.guesses.length
+                const row = this.getCurrentGame.guesses.length
                 let disabled = false
-                this.getGrid[row].forEach(e => {
-                    if (e === '') {
-                        disabled = true
-                    }
-                })
+                const currentRow = this.getGrid[row]
+                if(currentRow){
+                    disabled = currentRow.some(guess => !guess)
+                }
                 return disabled
             },
 
             resetIsDisabled() {
-                let disabled = true
-                this.getGrid[0].forEach(e => {
-                    if (e !== '') {
-                        disabled = false
-                    }
-                })
-                return disabled
+                const firstRow = this.getGrid[0]
+                return !firstRow.some(guess => guess)
             },
 
             gameIsFinished() {
