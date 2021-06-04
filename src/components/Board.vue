@@ -8,12 +8,12 @@
             </h3>
 
             <div class="guess">
-                <a v-for="(guess, j) in getGrid[i]"
+                <button v-for="(guess, j) in getGrid[i]"
                    :key="'guess-'+j"
                    v-on:click="guessUnit(i, j)"
                    :style="{background: getGrid[i][j]}"
                    class="index">
-                </a>
+                </button>
             </div>
 
             <div class="result">
@@ -102,6 +102,7 @@
 
             .index {
                 cursor: pointer;
+                border: unset;
                 width: 27px;
                 height: 27px;
                 border-radius: 30px;
