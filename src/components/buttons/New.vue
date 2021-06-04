@@ -1,5 +1,5 @@
 <template>
-    <a v-on:click="newGame" class="new-game shadow">{{ text }}</a>
+    <button v-on:click="newGame" class="new-game shadow">{{ text }}</button>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
         props: ['text'],
         methods: {
             newGame() {
-                this.$emit('newGame')
+                this.$store.dispatch('newGame',true)
             }
         }
     }
@@ -18,6 +18,8 @@
 
     .new-game {
         cursor: pointer;
+        border: unset;
+        color: #2794ea;
         position: fixed;
         left: 50%;
         transform: translate(-50%, 0);
@@ -50,7 +52,7 @@
             position: absolute;
             bottom: 0;
             left: 70px;
-            min-width: 105px;
+            min-width: 110px;
         }
     }
 

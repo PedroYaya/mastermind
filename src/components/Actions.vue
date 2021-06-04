@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <New @newGame="newGame" text="New Game" />
+        <New text="New Game" />
     </div>
 </template>
 
@@ -41,13 +41,9 @@
         },
         methods: {
 
-            newGame() {
-                this.$store.dispatch('newGame',true)
-            },
-
             reset() {
                 if (!this.resetIsDisabled) {
-                    this.newGame()
+                    this.$store.dispatch('newGame',true)
                 }
             },
 

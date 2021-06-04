@@ -1,15 +1,27 @@
-import { mount } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
+import Vuex from 'vuex'
 import New from '@/components/buttons/New.vue'
 
-describe('New.vue', () => {
-    it('renders props when passed', () => {
-        const text = 'click here'
-        const wrapper = mount(New, {
-            propsData: {
-                text: text
-            }
-        })
+const localVue = createLocalVue()
 
-        expect(wrapper.text()).toContain(text)
+localVue.use(Vuex)
+
+describe('New.vue', () => {
+    let actions
+    let store
+
+    beforeEach(() => {
+        actions = {
+            newGame: jest.fn(),
+        }
+        store = new Vuex.Store({
+            actions
+        })
+    })
+
+    it('calls store action "newGame" when button is clicked', () => {
+        const wrapper = shallowMount(New, { store, localVue })
+        wrapper.find('button').trigger('click')
+        expect(actions.newGame).toHaveBeenCalled()
     })
 })
