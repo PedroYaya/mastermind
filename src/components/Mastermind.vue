@@ -58,10 +58,17 @@
 
     .game-container {
         display: grid;
-        grid-template-columns: 10% 80% 10%;
+        grid-template-columns: 10% 75% 15%;
         padding: 5px;
         width: 100%;
         margin: auto;
+    }
+
+    @media screen and (max-width: 340px) {
+
+        .game-container {
+            grid-template-columns: 10% 78% 12%;
+        }
     }
 
     @media screen and (min-width: 768px) {
@@ -74,6 +81,7 @@
         }
 
         .game-container {
+            grid-template-columns: 10% 80% 10%;
             min-width: 500px;
             width: fit-content;
         }

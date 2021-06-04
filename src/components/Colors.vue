@@ -36,9 +36,15 @@
             cursor: pointer;
             display: block;
             margin: 15px auto;
-            width: 30px;
-            height: 30px;
+            width: 27px;
+            height: 27px;
             border-radius: 30px;
+
+            @media screen and (min-width: 768px) {
+                width: 30px;
+                height: 30px;
+            }
         }
     }
+
 </style>

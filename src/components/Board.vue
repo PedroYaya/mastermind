@@ -2,10 +2,10 @@
     <div class="board shadow">
         <div v-for="(row, i) in getGrid" :key="'row-'+i" class="guess-row">
 
-            <h2 class="row-index"
+            <h3 class="row-index"
                 :class="[rowIndex !== i || getGameIsDisabled ? ' disabled' : '']">
                 0{{ i + 1 }}
-            </h2>
+            </h3>
 
             <div class="guess">
                 <a v-for="(guess, j) in getGrid[i]"
@@ -102,8 +102,8 @@
 
             .index {
                 cursor: pointer;
-                width: 30px;
-                height: 30px;
+                width: 27px;
+                height: 27px;
                 border-radius: 30px;
                 background: #f0f0f0;
                 margin: 5px;
@@ -137,7 +137,6 @@
     @media screen and (min-width: 768px) {
 
         .board {
-            padding: 20px;
 
             .guess-row {
 
@@ -150,6 +149,8 @@
 
                     .index {
                         margin: 10px;
+                        width: 30px;
+                        height: 30px;
                     }
                 }
             }

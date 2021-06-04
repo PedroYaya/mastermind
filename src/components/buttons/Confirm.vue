@@ -34,4 +34,11 @@
         }
     }
 
+    @media screen and (min-width: 768px) {
+
+        .confirm {
+            margin: 15px !important;
+        }
+    }
+
 </style>
