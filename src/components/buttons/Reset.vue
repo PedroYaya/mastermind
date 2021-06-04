@@ -1,7 +1,7 @@
 <template>
-    <a v-on:click="reset" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
+    <button v-on:click="reset" class="reset shadow" :class="isDisabled ? ' disabled' : ''">
         <img src="../../assets/icons/reset.png" height="20px" width="20px"/>
-    </a>
+    </button>
 </template>
 
 <script>
@@ -22,6 +22,7 @@
 
     .reset {
         cursor: pointer;
+        border: unset;
         display: block;
         background: white;
         border-radius: 15px;

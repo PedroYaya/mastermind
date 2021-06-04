@@ -1,7 +1,7 @@
 <template>
-    <a v-on:click="confirmGuess" class="confirm shadow" :class="isDisabled ? ' disabled' : ''">
+    <button v-on:click="confirmGuess" class="confirm shadow" :class="isDisabled ? ' disabled' : ''">
         <img src="../../assets/icons/check.png" height="20px" width="20px"/>
-    </a>
+    </button>
 </template>
 
 <script>
@@ -22,6 +22,7 @@
 
     .confirm {
         cursor: pointer;
+        border: unset;
         display: block;
         background: white;
         border-radius: 15px;
