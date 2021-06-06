@@ -2,8 +2,8 @@
     <div class="actions">
 
         <div class="buttons-container" v-if="!getGameIsDisabled">
-            <Confirm @confirmGuess="confirmGuess" :isDisabled="confirmIsDisabled"/>
-            <Reset @reset="reset" :isDisabled="resetIsDisabled"/>
+            <Confirm/>
+            <Reset/>
         </div>
 
         <div v-if="gameIsFinished" class="results">
@@ -23,10 +23,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
     import { mapGetters } from 'vuex'
     import { getCurrentGame } from '../store/constants'
-    import { getGrid } from '../store/constants'
     import { getGameIsDisabled } from '../store/constants'
     import Confirm from './buttons/Confirm'
     import Reset from './buttons/Reset'
@@ -39,69 +37,11 @@
             Reset,
             New
         },
-        methods: {
-
-            reset() {
-                if (!this.resetIsDisabled) {
-                    this.$store.dispatch('newGame',true)
-                }
-            },
-
-            confirmGuess() {
-                const id = this.getCurrentGame.id;
-                const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
-                let row = this.getCurrentGame.guesses.length
-
-                const guess = { code: [] }
-
-                this.getGrid[row].forEach(e => { guess.code.push(e) })
-
-                if (!this.confirmIsDisabled) {
-                    axios.post(url, guess).then( (response) => {
-
-                        this.$store.commit('setCurrentGame', response.data)
-                        this.$store.commit('setActive')
-
-                        let arr = []
-                        for (let i = 0; i < response.data.guesses[row].black_pegs; i++) {
-                            arr.push('black')
-                        }
-                        for (let i = 0; i < response.data.guesses[row].white_pegs; i++) {
-                            arr.push('white')
-                        }
-                        while(arr.length < this.getCurrentGame.num_slots) {
-                            arr.push('')
-                        }
-
-                        this.$store.commit('setRowPegs', {
-                            row,
-                            arr
-                        });
-                    })
-                }
-            }
-        },
         computed: {
             ...mapGetters([
-                getGrid,
                 getCurrentGame,
                 getGameIsDisabled
             ]),
-
-            confirmIsDisabled() {
-                const row = this.getCurrentGame.guesses.length
-                let disabled = false
-                const currentRow = this.getGrid[row]
-                if(currentRow){
-                    disabled = currentRow.some(guess => !guess)
-                }
-                return disabled
-            },
-
-            resetIsDisabled() {
-                const firstRow = this.getGrid[0]
-                return !firstRow.some(guess => guess)
-            },
 
             gameIsFinished() {
                 return this.getCurrentGame.status && this.getCurrentGame.status !== 'running'

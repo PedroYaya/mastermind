@@ -5,14 +5,26 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+    import { getGrid } from '../../store/constants'
+
     export default {
         name: 'Reset',
-        props: {
-            isDisabled: Boolean
+        computed: {
+            ...mapGetters([
+                getGrid,
+            ]),
+
+            isDisabled() {
+                let firstRow = this.getGrid[0]
+                return !firstRow.some(guess => guess)
+            }
         },
         methods: {
             reset() {
-                this.$emit('reset')
+                if (!this.isDisabled) {
+                    this.$store.dispatch('newGame',true)
+                }
             }
         }
     }
