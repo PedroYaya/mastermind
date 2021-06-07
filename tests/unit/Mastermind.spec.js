@@ -30,7 +30,7 @@ describe('Mastermind.vue', () => {
         })
     })
 
-    it('renders child components', () => {
+    it('Mastermind renders child components', () => {
         const wrapper = shallowMount(Mastermind, { store, localVue })
         expect(wrapper.findComponent(Colors).exists()).toBe(true)
         expect(wrapper.findComponent(Board).exists()).toBe(true)
