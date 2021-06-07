@@ -32,13 +32,13 @@
             confirmGuess() {
                 const id = this.getCurrentGame.id;
                 const url = 'http://localhost:8000/api/games/' + id + '/guesses/';
-                let row = this.getCurrentGame.guesses.length
+                const row = this.getCurrentGame.guesses.length
 
                 const guess = { code: [] }
 
                 this.getGrid[row].forEach(e => { guess.code.push(e) })
 
-                if (!this.confirmIsDisabled) {
+                if (!this.isDisabled) {
                     axios.post(url, guess).then( (response) => {
 
                         this.$store.commit('setCurrentGame', response.data)
